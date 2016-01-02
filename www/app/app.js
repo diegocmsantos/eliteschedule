@@ -1,4 +1,4 @@
-angular.module("eliteApp", ["ionic", "angular-cache"])
+angular.module("eliteApp", ["ionic", "angular-cache", "uiGmapgoogle-maps"])
 
 .run(function($ionicPlatform, CacheFactory) {
   $ionicPlatform.ready(function() {
@@ -12,8 +12,8 @@ angular.module("eliteApp", ["ionic", "angular-cache"])
       StatusBar.styleDefault();
     }
 
-    CacheFactory("leagueDataCache", { storageMode: "localStorage", maxAge: 5000, deleteOnExpire: "aggressive" });
-    CacheFactory("leaguesCache", { storageMode: "localStorage", maxAge: 5000, deleteOnExpire: "aggressive" });
+    CacheFactory("leagueDataCache", { storageMode: "localStorage", maxAge: 360000, deleteOnExpire: "aggressive" });
+    CacheFactory("leaguesCache", { storageMode: "localStorage", maxAge: 360000, deleteOnExpire: "aggressive" });
     CacheFactory("myTeamsCache", { storageMode: "localStorage" });
     CacheFactory("staticCache", { storageMode: "localStorage" });
   });
@@ -28,6 +28,7 @@ angular.module("eliteApp", ["ionic", "angular-cache"])
       url: '/home',
       templateUrl: 'app/home/home.html'
     })
+
     .state('home.leagues', {
       url: '/leagues',
       views: {
@@ -36,6 +37,7 @@ angular.module("eliteApp", ["ionic", "angular-cache"])
         }
       }
     })
+
     .state('home.myteams', {
       url: '/myteams',
       views: {
@@ -44,11 +46,13 @@ angular.module("eliteApp", ["ionic", "angular-cache"])
         }
       }
     })
+
     .state('app', {
       abstract: true,
       url: '/app',
       templateUrl: 'app/layout/menu-layout.html'
     })
+
     .state('app.teams', {
       url: '/teams',
       views: {
@@ -57,6 +61,7 @@ angular.module("eliteApp", ["ionic", "angular-cache"])
         }
       }
     })
+
     .state('app.team-detail', {
       url: '/teams/:id',
       views: {
@@ -65,6 +70,7 @@ angular.module("eliteApp", ["ionic", "angular-cache"])
         }
       }
     })
+
     .state('app.game', {
       url: '/game/:id',
       views: {
@@ -73,6 +79,7 @@ angular.module("eliteApp", ["ionic", "angular-cache"])
         }
       }
     })
+
     .state('app.standings', {
       url: '/standings',
       views: {
@@ -81,6 +88,7 @@ angular.module("eliteApp", ["ionic", "angular-cache"])
         }
       }
     })
+
     .state('app.locations', {
       url: '/locations',
       views: {
@@ -89,6 +97,16 @@ angular.module("eliteApp", ["ionic", "angular-cache"])
         }
       }
     })
+
+    .state('app.location-map', {
+      url: '/location-map/:id',
+      views: {
+        "mainContent": {
+          templateUrl: "app/locations/location-map.html"
+        }
+      }
+    })
+
     .state('app.rules', {
       url: '/rules',
       views: {

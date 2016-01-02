@@ -12,6 +12,7 @@
     eliteApi.getLeagueData()
       .then(function( data ) {
 
+        console.log( data );
         vm.locations = data.locations;
 
       });
